@@ -1,0 +1,4 @@
+numpy==1.14.3
+Pillow==5.1.0
+requests==2.19.1
+hgtiles==0.2.3
