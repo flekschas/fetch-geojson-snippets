@@ -175,11 +175,12 @@ def get_images(
 
         xPad = padding * (end1 - start1)
         yPad = padding * (start2 - end2)
+        pad = min(xPad, yPad)
 
-        start1 -= xPad
-        end1 += xPad
-        start2 += yPad
-        end2 -= yPad
+        start1 -= pad
+        end1 += pad
+        start2 += pad
+        end2 -= pad
 
         tile_start1_id = math.floor(start1)
         tile_start2_id = math.floor(start2)
@@ -371,6 +372,9 @@ def fetch_geojson_snippets(
 ):
     if not os.path.isfile(geojson_db_path):
         sys.exit('GeoJSON file not found! ☹️')
+
+    padding /= 100
+    padding = max(0, min(1, padding))
 
     # Read snapshots
     db = sqlite3.connect(geojson_db_path)
